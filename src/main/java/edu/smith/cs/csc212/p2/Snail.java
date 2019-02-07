@@ -39,6 +39,7 @@ public class Snail extends WorldObject {
 	 */
 	public Snail(World world) {
 		super(world);
+		
 	}
 
 	/**
