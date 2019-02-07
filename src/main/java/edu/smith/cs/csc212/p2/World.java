@@ -29,7 +29,7 @@ public class World {
 	/**
 	 * A reference to a random object, so we can randomize placement of objects in this world.
 	 */
-	private Random rand = ThreadLocalRandom.current();
+	Random rand = ThreadLocalRandom.current();
 
 	/**
 	 * Create a new world of a given width and height.

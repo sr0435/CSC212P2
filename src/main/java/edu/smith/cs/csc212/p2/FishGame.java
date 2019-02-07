@@ -45,7 +45,7 @@ public class FishGame {
 	
 	int rockNum;
 	
-	Snail snail;
+	//Snail snail;
 	/**
 	 * Create a FishGame of a particular size.
 	 * @param w how wide is the grid?
@@ -60,14 +60,14 @@ public class FishGame {
 		// Add a home!
 		home = world.insertFishHome();
 		
-		Random rockRand = new Random();
-		rockNum = rockRand.nextInt(15) + 5;
+		//Random rockRand = new Random();
+		rockNum = world.rand.nextInt(15) + 5;
 		for (int i=0; i<rockNum; i++) {
 			world.insertRockRandomly();
 		}
 		
-		// TODO(lab) Make the snail!
 		//snail = new Snail(world);
+		world.insertSnailRandomly();
 		world.insertSnailRandomly();
 		// Make the player out of the 0th fish color.
 		player = new Fish(0, world);
@@ -121,9 +121,9 @@ public class FishGame {
 				missing.remove(wo);
 				
 				// Remove from world.
-				// TODO(lab): add to found instead! (So we see objectsFollow work!)
-				world.remove(wo);
-				
+					//world.remove(wo);
+				found.add((Fish) wo);
+				World.objectsFollow(player, found);
 				// Increase score when you find a fish!
 				score += 10;
 			}
@@ -146,6 +146,8 @@ public class FishGame {
 			// 30% of the time, lost fish move randomly.
 			if (rand.nextDouble() < 0.3) {
 				// TODO(lab): What goes here?
+				//World.moveRandomly();
+				//missing,moveRandomly();
 			}
 		}
 	}
