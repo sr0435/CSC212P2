@@ -1,5 +1,6 @@
 package edu.smith.cs.csc212.p2;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -150,6 +151,18 @@ public class World {
 		return r;
 	}
 	
+	public FallingRock fallingRock() {
+		FallingRock r = new FallingRock(this);
+		insertRandomly(r);
+		return r;
+	}
+	
+	public Bubble insertBubbleRandomly() {
+		Bubble b = new Bubble(this);
+		insertRandomly(b);
+		return b;
+	}
+	
 	/**
 	 * Insert a new Fish into the world at random of a specific color.
 	 * @param color - the color of the fish.
@@ -177,6 +190,12 @@ public class World {
 		return snail;
 	}
 	
+	public FishFood insertFoodRandomly() {
+		FishFood food = new FishFood(this);
+		insertRandomly(food);
+		return food;
+	}
+	
 	/**
 	 * Determine if a WorldObject can swim to a particular point.
 	 * 
@@ -197,11 +216,27 @@ public class World {
 		List<WorldObject> inSpot = this.find(x, y);
 		
 		for (WorldObject it : inSpot) {
-			// TODO(P2): Don't let us move over rocks as a Fish.
+			// fish can't step on rocks
+			if (it instanceof Rock) {
+				//System.out.println(isPlayer + " rockkk");
+				return false;
+			}
+			// (P2): Don't let us move over rocks as a Fish.
 			// The other fish shouldn't step "on" the player, the player should step on the other fish.
-			if (it instanceof Snail) {
+			// fish don't step on snails
+			else if (it instanceof Snail) {
 				// This if-statement doesn't let anyone step on the Snail.
 				// The Snail(s) are not gonna take it.
+				//System.out.println(isPlayer + "snailll");
+				return false;
+			}
+			
+			// fish can't step on the player
+			else if (it.isPlayer()==true && whoIsAsking.isFish() == true && isPlayer == false) {
+				return false;
+			}
+			// fish can't step on each other
+			else if (it.isFish()==true && whoIsAsking.isFish() == true && isPlayer == false) {
 				return false;
 			}
 		}
@@ -226,11 +261,21 @@ public class World {
 	 * @param followers a set of objects to follow the leader.
 	 */
 	public static void objectsFollow(WorldObject target, List<? extends WorldObject> followers) {
-		// TODO(P2) Comment this method!
+		
+		// (P2) Comment this method!
 		// What is recentPositions?
+			// recentPositions is a deque that holds all the IntPoints 
+			//(the class for intermediate points)
+			// in this case, it holds all the IntPoints of the player
 		// What is followers?
+			// followers is a list of worldObjects
+			// we use it in FishGame to hold the found List
 		// What is target?
+			// target is a WorldObject. In FishGame, it is the player
 		// Why is past = putWhere[i+1]? Why not putWhere[i]?
+			// if it was just i, then the first follower would be put in 
+			// the place of the player, not one behind it
+		
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);
 		for (int i=0; i<followers.size(); i++) {
 			IntPoint past = putWhere.get(i+1);

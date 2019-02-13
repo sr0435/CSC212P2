@@ -19,7 +19,7 @@ public class PlayFish extends GFX {
 	/**
 	 * Game size (visual). Try changing this to 600.
 	 */
-	public static int VISUAL_GRID_SIZE = 625;
+	public static int VISUAL_GRID_SIZE = 600;
 	/**
 	 * Game size (logical).
 	 */
@@ -173,7 +173,7 @@ public class PlayFish extends GFX {
 		this.gameState.setString(
 				"Step #: " + game.stepsTaken + 
 				" ... Fish Left: " + game.missingFishLeft() +
-				" ... Score: "+ game.score);
+				" ... Score: "+ game.score + "... Steps Left: " + game.stepsLeft);
 
 		// Read the state of the keyboard:
 		boolean up = this.processKey(KeyEvent.VK_W) || this.processKey(KeyEvent.VK_UP);

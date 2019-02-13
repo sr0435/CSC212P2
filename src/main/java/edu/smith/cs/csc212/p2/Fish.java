@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -19,16 +21,18 @@ public class Fish extends WorldObject {
 	 */
 	
 	static Random rand = new Random();
-	
 	public static Color[] COLORS = {
 			Color.red,
 			Color.green,
 			Color.yellow,
 			Color.orange,
 			Color.gray,
-			Color.magenta
+			Color.magenta,
+			Color.cyan,
+			Color.black,
+			Color.pink
 			
-			// TODO: (P2) Maybe make a special fish that is more points?
+			// done in fishgame: (P2) Maybe make a special fish that is more points?
 	};
 	/**
 	 * This is an index into the {@link #COLORS} array.
@@ -42,6 +46,8 @@ public class Fish extends WorldObject {
 	/**
 	 * Called only on the Fish that is the player!
 	 */
+	
+	//dict scoring;
 	public void markAsPlayer() {
 		this.player = true;
 	}
@@ -70,10 +76,21 @@ public class Fish extends WorldObject {
 	 */
 	private int dt = 0;
 	
+	/*
+	 * public static Map<Color, Integer> fishMap() { Map<Color,Integer> scoring =
+	 * new HashMap<>(); Integer i = 0; for (i=0; i<rand.nextInt(5)+7; i++) {
+	 * scoring.put(Color.getHSBColor(rand.nextFloat(),0.8f, 0.8f),
+	 * rand.nextInt(10)); } //System.out.println(scoring.keySet());
+	 * 
+	 * return scoring; }
+	 */
+	
 	/**
 	 * Go ahead and ignore this method if you're not into graphics.
 	 * We use "dt" as a trick to make the fish change directions every second or so; this makes them feel a little more alive.
 	 */
+	
+	
 	@Override
 	public void draw(Graphics2D g) {
 		dt += 1;
@@ -94,10 +111,10 @@ public class Fish extends WorldObject {
 			flipped.scale(-1, 1);
 		}
 		
-		if (this.player) {
-			flipped.setColor(new Color(1f,1f,1f,0.5f));
-			flipped.fill(circle);
-		}
+		/*
+		 * if (this.player) { flipped.setColor(new Color(1f,1f,1f,0.5f));
+		 * flipped.fill(circle); }
+		 */
 
 		// Draw the fish of size (1x1, roughly, at 0,0).
 		flipped.setColor(color);
@@ -117,4 +134,6 @@ public class Fish extends WorldObject {
 	public void step() {
 		// Fish are controlled at a higher level; see FishGame.
 	}
+	
+	
 }
