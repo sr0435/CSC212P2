@@ -304,3 +304,28 @@ public class FishGame {
 	}
 	
 }
+
+private void wanderMissingFish() {
+		Random rand = ThreadLocalRandom.current();
+		for (Fish lost : missing) {
+			bubbleList.addAll(missing);
+			// calls these methods to check for fish food and bubbles
+			feeding();
+			/*
+			 * bubbled(); if (bubbled() != true) {
+			 * 
+			 * bubbleList.remove(lost); }
+			 */
+				//missing.remove(lost);
+			// 30% of the time, lost fish move randomly.
+			if (rand.nextDouble() < 0.3) {
+					// (lab): What goes here? finished but not sure yet
+					for (int i=0; i < bubbleList.size(); i++) {
+						bubbleList.get(i).moveRandomly();
+				}
+			}
+			/*
+			 * else { break; }
+			 */
+		}
+	}
