@@ -218,16 +218,21 @@ public class World {
 		for (WorldObject it : inSpot) {
 			// fish can't step on rocks
 			if (it instanceof Rock) {
-				//System.out.println(isPlayer + " rockkk");
 				return false;
 			}
 			// (P2): Don't let us move over rocks as a Fish.
 			// The other fish shouldn't step "on" the player, the player should step on the other fish.
+			else if (it instanceof FallingRock) {
+				return false;
+			}
 			// fish don't step on snails
 			else if (it instanceof Snail) {
 				// This if-statement doesn't let anyone step on the Snail.
 				// The Snail(s) are not gonna take it.
-				//System.out.println(isPlayer + "snailll");
+				return false;
+			}
+			
+			else if (it.isFish() == true && whoIsAsking.isPlayer()== false) {
 				return false;
 			}
 			

@@ -47,7 +47,6 @@ public class Fish extends WorldObject {
 	 * Called only on the Fish that is the player!
 	 */
 	
-	//dict scoring;
 	public void markAsPlayer() {
 		this.player = true;
 	}
@@ -76,15 +75,6 @@ public class Fish extends WorldObject {
 	 */
 	private int dt = 0;
 	
-	/*
-	 * public static Map<Color, Integer> fishMap() { Map<Color,Integer> scoring =
-	 * new HashMap<>(); Integer i = 0; for (i=0; i<rand.nextInt(5)+7; i++) {
-	 * scoring.put(Color.getHSBColor(rand.nextFloat(),0.8f, 0.8f),
-	 * rand.nextInt(10)); } //System.out.println(scoring.keySet());
-	 * 
-	 * return scoring; }
-	 */
-	
 	/**
 	 * Go ahead and ignore this method if you're not into graphics.
 	 * We use "dt" as a trick to make the fish change directions every second or so; this makes them feel a little more alive.
@@ -111,10 +101,10 @@ public class Fish extends WorldObject {
 			flipped.scale(-1, 1);
 		}
 		
-		/*
-		 * if (this.player) { flipped.setColor(new Color(1f,1f,1f,0.5f));
-		 * flipped.fill(circle); }
-		 */
+		
+		  if (this.player) { flipped.setColor(new Color(1f,1f,1f,0.5f));
+		  flipped.fill(circle); }
+		 
 
 		// Draw the fish of size (1x1, roughly, at 0,0).
 		flipped.setColor(color);

@@ -32,7 +32,6 @@ public class Bubble extends WorldObject{
 
 	@Override
 	public void step() {
-		moveRandomly();
 		
 		
 	}}
