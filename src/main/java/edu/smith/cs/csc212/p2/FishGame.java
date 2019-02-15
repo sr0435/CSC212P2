@@ -38,6 +38,8 @@ public class FishGame {
 	
 	// fish that have been taken home
 	List<Fish> homeList;
+	
+	List<Fish> bubbledFish;
 	/**
 	 * Number of steps!
 	 */
@@ -51,6 +53,8 @@ public class FishGame {
 	
 	// creates a list to count down to when the game wins (uses isEmpty())
 	List<Fish> winGame;
+	
+	Bubble[] bubbleBuds = new Bubble[6];
 
 	/**
 	 * Create a FishGame of a particular size.
@@ -64,6 +68,8 @@ public class FishGame {
 		found = new ArrayList<Fish>();
 		homeList = new ArrayList<Fish>();
 		winGame = new ArrayList<Fish>();
+		bubbledFish = new ArrayList<Fish>();
+
 		// Add a home!
 		home = world.insertFishHome();
 		
@@ -71,10 +77,11 @@ public class FishGame {
 		for (int i=0; i<(world.rand.nextInt(15) + 5-6); i++) {
 			world.insertRockRandomly();
 		}
-		// puts in 6 bubbles
+		// puts in 6 bubbles (and 6 falling rocks)
+		
 		for (int i=0; i < 6; i++) {
 			world.fallingRock();
-			world.insertBubbleRandomly();
+			bubbleBuds[i] = world.insertBubbleRandomly();
 		}
 		
 		world.insertSnailRandomly();
@@ -125,7 +132,7 @@ public class FishGame {
 		if (this.stepsLeft == 10) {
 			world.insertFoodRandomly();
 		}
-				
+		
 		// These are all the objects in the world in the same cell as the player.
 		List<WorldObject> overlap = this.player.findSameCell();
 		// checks if something is at home
@@ -188,7 +195,7 @@ public class FishGame {
 		}
 			}
 		// Make sure missing fish *do* something.
-		// the game gest harder the more fish you catch (fastscared)
+		// the game gets harder the more fish you catch (fastscared)
 		if (homeList.size() > missingFishLeft()) {
 			fastScared();}
 		else if (homeList.size() <= missingFishLeft()) {
@@ -222,7 +229,6 @@ public class FishGame {
 		Random rand = ThreadLocalRandom.current();
 		for (Fish lost : missing) {
 			feeding();
-			System.out.println(lost.trapped);
 			}
 			// 30% of the time, lost fish move randomly.
 			if (rand.nextDouble() < 0.3) {
@@ -247,17 +253,17 @@ public class FishGame {
 	}
 	
 	public void reachHome() {
-		Integer i = 0;
+		//Integer i = 0;
 		for (Fish fish : this.found) {
 			// adds fish to home list and removes from wingame to check win
 				homeList.add(fish);
 				winGame.remove(fish);
 				world.remove(fish);
+				stepsLeft = 20;
 			}
 			this.found.removeAll(homeList);
 			}
 	
-	boolean bubbled;
 	public void feeding() {
 		for (Fish lost : missing) {
 		List<WorldObject> inSpot = lost.findSameCell();
