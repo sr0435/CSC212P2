@@ -244,6 +244,7 @@ public class World {
 			else if (it.isFish()==true && whoIsAsking.isFish() == true && isPlayer == false) {
 				return false;
 			}
+
 		}
 		
 		// If we didn't see an obstacle, we can move there!

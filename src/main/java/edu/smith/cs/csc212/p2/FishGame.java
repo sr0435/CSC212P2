@@ -132,7 +132,6 @@ public class FishGame {
 		if (this.stepsLeft == 10) {
 			world.insertFoodRandomly();
 		}
-		
 		// These are all the objects in the world in the same cell as the player.
 		List<WorldObject> overlap = this.player.findSameCell();
 		// checks if something is at home
