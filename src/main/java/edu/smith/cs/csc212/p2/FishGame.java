@@ -177,9 +177,14 @@ public class FishGame {
 					reachHome();
 					
 		}
+		// player "eats" the fish food and increases the score
 		else if (wo instanceof FishFood) {
 			world.remove(wo);
 			score += 5;
+		}
+		// removes the bubble when the player touches it
+		else if (wo instanceof Bubble) {
+			world.remove(wo);
 		}
 			}
 		// Make sure missing fish *do* something.
@@ -217,6 +222,7 @@ public class FishGame {
 		Random rand = ThreadLocalRandom.current();
 		for (Fish lost : missing) {
 			feeding();
+			System.out.println(lost.trapped);
 			}
 			// 30% of the time, lost fish move randomly.
 			if (rand.nextDouble() < 0.3) {
@@ -251,14 +257,19 @@ public class FishGame {
 			this.found.removeAll(homeList);
 			}
 	
-	
+	boolean bubbled;
 	public void feeding() {
 		for (Fish lost : missing) {
 		List<WorldObject> inSpot = lost.findSameCell();
 		for (WorldObject wo : inSpot) {
 			if (wo instanceof FishFood) {
 				world.remove(wo);
-			}}}
+			}
+			else if (wo instanceof Bubble) {
+				world.remove(wo);
+				world.register(wo);
+			}
+			}}
 	}
 
 	/**

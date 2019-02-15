@@ -46,6 +46,8 @@ public class Fish extends WorldObject {
 	/**
 	 * Called only on the Fish that is the player!
 	 */
+	boolean trapped = false;
+	
 	
 	public void markAsPlayer() {
 		this.player = true;
